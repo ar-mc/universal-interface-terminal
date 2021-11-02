@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "UniversalInterfaceTerminal",
+    "name": "Universal Interface Terminal",
+    "description": "Universal Interface Terminal",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Arne Sacnussem"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

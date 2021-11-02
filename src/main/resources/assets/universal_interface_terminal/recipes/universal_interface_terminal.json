@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "appliedenergistics2:part",
+      "part": "part.interface_terminal"
+    }
+  ],
+  "result": {
+    "item": "universal_interface_terminal:universal_interface_terminal",
+    "nbt": {}
+  }
+}
