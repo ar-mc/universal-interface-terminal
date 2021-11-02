@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5.1.23'
     }
 }
 
@@ -55,7 +55,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855'
 
 //  https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files/2747063
-    compile "curse.maven:applied-energistics-2-223794:2747063"
+    implementation "curse.maven:applied-energistics-2-223794:2747063"
 }
 
 jar {

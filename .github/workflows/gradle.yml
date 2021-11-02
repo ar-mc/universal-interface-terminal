@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-        run: ./gradlew clean setupCIWorkspace build
+        run: ./gradlew clean jar
       - name: Upload Jar
         uses: actions/upload-artifact@v1
         with:
