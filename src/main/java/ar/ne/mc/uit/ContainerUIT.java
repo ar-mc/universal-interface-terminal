@@ -31,9 +31,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -231,24 +229,8 @@ public final class ContainerUIT extends AEBaseContainer {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private Stream<Class<? extends IGridHost>> getAllClassRefStream() {
-        List<Class<? extends IGridHost>> classList = new ArrayList<>();
-        for (String classRef : UITConfig.ClassesReference) {
-            if (CLASS_CACHE.containsKey(classRef)) {
-                classList.add(CLASS_CACHE.get(classRef));
-                continue;
-            }
-            try {
-                Class<? extends IGridHost> clazz = (Class<? extends IGridHost>) ContainerUIT.this.getClass().getClassLoader().loadClass(classRef);
-                classList.add(clazz);
-                CLASS_CACHE.put(classRef, clazz);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return classList.stream();
+        return UniversalInterfaceTerminal.CLASS_LIST.stream();
     }
 
     private void regenList(final NBTTagCompound data) {

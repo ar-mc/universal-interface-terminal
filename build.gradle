@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -13,14 +12,13 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "0.1"
+version = "0.2"
 group = "ar.ne.mc.UniversalInterfaceTerminal"
 archivesBaseName = "UniversalInterfaceTerminal"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 repositories {
-    jcenter()
     mavenCentral()
     maven {
         // location of the maven that hosts JEI files
@@ -56,6 +54,9 @@ dependencies {
 
 //  https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files/2747063
     implementation "curse.maven:applied-energistics-2-223794:2747063"
+
+//    https://www.curseforge.com/minecraft/mc-mods/ae2-fluid-crafting/files/3449611
+    compileOnly "curse.maven:ae2fc-3449611:387275"
 }
 
 jar {
