@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
-import java.util.logging.Logger;
 
 import static ar.ne.mc.uit.UniversalInterfaceTerminal.MOD_ID;
 import static ar.ne.mc.uit.UniversalInterfaceTerminal.NAME;
@@ -28,7 +28,6 @@ public class UniversalInterfaceTerminal {
     public static final String NAME = "Universal Interface Terminal";
     public static final ItemPartUIT ITEM_PART_UIT = new ItemPartUIT();
     public static final HashSet<Class<? extends IGridHost>> CLASS_LIST = new HashSet<>();
-    private static final Logger LOGGER = Logger.getLogger(MOD_ID);
     @Nonnull
     private static final UniversalInterfaceTerminal INSTANCE = new UniversalInterfaceTerminal();
 
@@ -58,12 +57,12 @@ public class UniversalInterfaceTerminal {
                 @SuppressWarnings("unchecked")
                 Class<? extends IGridHost> clazz = (Class<? extends IGridHost>) getClass().getClassLoader().loadClass("c");
                 CLASS_LIST.add(clazz);
-                LOGGER.info("Registered class " + clazz.getName());
+                FMLLog.log.info("Registered class " + clazz.getName());
             } catch (ClassNotFoundException e) {
-                LOGGER.warning("Class " + c + " not found!");
+                FMLLog.log.error("Class " + c + " not found!");
                 e.printStackTrace();
             }
         }
-        LOGGER.info("Universal Interface Terminal loaded");
+        FMLLog.log.info("Universal Interface Terminal loaded");
     }
 }
