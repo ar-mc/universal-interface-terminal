@@ -11,7 +11,7 @@ public final class UITConfig {
             "Typically any 'block' style interface have two class ref: 'Part' variant and 'Tile' variant.",
             "Default to AE2's ME Interface and Volumetric Flask's interface and DualInterface in AE2 Fluid Crafting."
     })
-    @Config.RequiresWorldRestart
+    @Config.RequiresMcRestart
     public static String[] ClassesReference = {
             "appeng.parts.misc.PartInterface",
             "appeng.tile.misc.TileInterface",

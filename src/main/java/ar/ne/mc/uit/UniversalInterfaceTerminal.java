@@ -7,13 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -27,9 +28,10 @@ public class UniversalInterfaceTerminal {
     public static final String MOD_ID = "universal_interface_terminal";
     public static final String NAME = "Universal Interface Terminal";
     public static final ItemPartUIT ITEM_PART_UIT = new ItemPartUIT();
-    public static final HashSet<Class<? extends IGridHost>> CLASS_LIST = new HashSet<>();
+    public static final HashSet<Class<? extends IGridHost>> CLASSES = new HashSet<>();
     @Nonnull
     private static final UniversalInterfaceTerminal INSTANCE = new UniversalInterfaceTerminal();
+    public static volatile Logger LOGGER;
 
     @Nonnull
     @Mod.InstanceFactory
@@ -49,20 +51,27 @@ public class UniversalInterfaceTerminal {
     }
 
     @Mod.EventHandler
+    private void preInitHandler(final FMLPreInitializationEvent event) {
+        LOGGER = event.getModLog();
+        LOGGER.debug("Universal Interface Terminal pre-init");
+    }
+
+    @Mod.EventHandler
     private void postInit(final FMLPostInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, EGuiBridge.GUI_Handler);
         NetworkHandler.init("AE2UNIVERSAL_INTERFACE_TERMINAL");
-        for (String c : UITConfig.ClassesReference) {
+
+        for (String s : UITConfig.ClassesReference) {
             try {
                 @SuppressWarnings("unchecked")
-                Class<? extends IGridHost> clazz = (Class<? extends IGridHost>) getClass().getClassLoader().loadClass("c");
-                CLASS_LIST.add(clazz);
-                FMLLog.log.info("Registered class " + clazz.getName());
+                Class<? extends IGridHost> clazz = (Class<? extends IGridHost>) getClass().getClassLoader().loadClass(s);
+                CLASSES.add(clazz);
+                LOGGER.info("Registering class: " + clazz.getName());
             } catch (ClassNotFoundException e) {
-                FMLLog.log.error("Class " + c + " not found!");
-                e.printStackTrace();
+                LOGGER.error("Class not found: " + s);
             }
         }
-        FMLLog.log.info("Universal Interface Terminal loaded");
+
+        LOGGER.debug("Universal Interface Terminal post-init");
     }
 }

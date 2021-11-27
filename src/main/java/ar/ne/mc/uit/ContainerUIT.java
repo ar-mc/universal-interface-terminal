@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 
 public final class ContainerUIT extends AEBaseContainer {
@@ -76,7 +75,7 @@ public final class ContainerUIT extends AEBaseContainer {
         if (host != null) {
             final IGridNode agn = host.getActionableNode();
             if (agn.isActive()) {
-                getAllClassRefStream().forEach(clazz -> {
+                UniversalInterfaceTerminal.CLASSES.forEach(clazz -> {
 
                     for (final IGridNode machine : this.grid.getMachines(clazz)) {
                         if (machine.isActive()) {
@@ -229,10 +228,6 @@ public final class ContainerUIT extends AEBaseContainer {
         }
     }
 
-    private Stream<Class<? extends IGridHost>> getAllClassRefStream() {
-        return UniversalInterfaceTerminal.CLASS_LIST.stream();
-    }
-
     private void regenList(final NBTTagCompound data) {
         this.byId.clear();
         this.interfaceHostInvMap.clear();
@@ -241,7 +236,7 @@ public final class ContainerUIT extends AEBaseContainer {
         if (host != null) {
             final IGridNode agn = host.getActionableNode();
             if (agn.isActive()) {
-                getAllClassRefStream().forEach(clazz -> {
+                UniversalInterfaceTerminal.CLASSES.forEach(clazz -> {
                     for (final IGridNode gn : this.grid.getMachines(clazz)) {
                         final IInterfaceHost ih = (IInterfaceHost) gn.getMachine();
                         final DualityInterface dual = ih.getInterfaceDuality();
